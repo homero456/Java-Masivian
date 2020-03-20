@@ -1,0 +1,61 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+public class Test  {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Parser p = new Parser();
+		Parser p1 = new Parser();
+		Parser p2 = new Parser();
+		File archivo = null;
+		File archivo2 = null;
+		File archivo3 = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		try {
+			// Apertura del fichero y creacion de BufferedReader para poder
+			// hacer una lectura comoda (disponer del metodo readLine()).
+			archivo = new File("C:\\java\\java.txt");
+			archivo2 = new File("C:\\java\\java.txt");
+			archivo3 = new File("C:\\java\\java.txt");
+			
+			p.setFile(archivo);
+			p1.setFile(archivo2);
+			p2.setFile(archivo3);
+			
+			System.out.println(p.getContent());
+			System.out.println(p1.getContent());
+			System.out.println(p2.getContent());
+			
+			p2.saveContent("hola mundo p2");
+			p1.saveContent("hola mundo p1");
+			p.saveContent("hola mundo p3");
+			
+			
+
+			// Lectura del fichero
+			//String linea;
+			//while ((linea = br.readLine()) != null)
+			//System.out.println(linea);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// En el finally cerramos el fichero, para asegurarnos
+			// que se cierra tanto si todo va bien como si salta
+			// una excepcion.
+			try {
+				//if (null != fr) {
+				//	fr.close();
+				//}
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+
+	}
+
+}
