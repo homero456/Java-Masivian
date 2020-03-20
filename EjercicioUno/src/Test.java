@@ -12,8 +12,7 @@ public class Test  {
 	 private static final ComponentOne componentOne = new ComponentOne();
 	 private static final ComponenteTwo componenteTwo = new ComponenteTwo();
 	 private static final ComponentThree componentTres = new ComponentThree();	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	 public static void main(String[] args) {
 
 		
 
@@ -25,16 +24,7 @@ public class Test  {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			// En el finally cerramos el fichero, para asegurarnos
-			// que se cierra tanto si todo va bien como si salta
-			// una excepcion.
-			try {
-				//if (null != fr) {
-				//	fr.close();
-				//}
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			
 		}
 
 	}

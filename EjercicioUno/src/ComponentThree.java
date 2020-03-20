@@ -4,7 +4,7 @@ public class ComponentThree extends Thread {
 	@Override
     public void run() {
         
-    	Parser p = new Parser();
+    	//Parser p = new Parser();
 		
 		File archivo = null;
 		
@@ -14,14 +14,14 @@ public class ComponentThree extends Thread {
 			// hacer una lectura comoda (disponer del metodo readLine()).
 			archivo = new File("C:\\java\\java.txt");
 			
-			p.setFile(archivo);
+			Parser.getInstance().setFile(archivo);
 			
-			System.out.println(p.getContent());
+			System.out.println(Parser.getInstance().getContent());
 			
 			//Thread.sleep(2000);
-			p.saveContent("hola mundo componente Tres");
+			Parser.getInstance().saveContent("hola mundo componente Tres");
 			
-			System.out.println(p.getContent()+"despues");
+			System.out.println(Parser.getInstance().getContent()+"despues");
 			//System.out.wait();
 
 			// Lectura del fichero

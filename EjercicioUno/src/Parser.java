@@ -9,6 +9,12 @@ import java.io.IOException;
  * This class is thread safe.
  */
 public class Parser  {
+	private static final Parser inst= new Parser();
+	
+	private Parser() {
+        super();
+    }
+	
 	private File file;
 
 	public synchronized void setFile(File f) {
@@ -20,7 +26,7 @@ public class Parser  {
 	}
 
 	//No es synchronized
-	public String getContent() throws IOException {
+	public synchronized String getContent() throws IOException {
 		FileInputStream i = new FileInputStream(file);
 		//Utilizar stringBuffer para reducir incremento de memoria
 		String output = "";
@@ -48,7 +54,8 @@ public class Parser  {
 		return output;
 	}
 	//No es synchronized
-	public  void saveContent(String content) throws IOException {
+	// Cuando guarda este metodo sobreescribe lo que hay en el archivo
+	public synchronized void saveContent(String content) throws IOException {
 		FileOutputStream o = new FileOutputStream(file);
 		try {
 
@@ -60,4 +67,9 @@ public class Parser  {
 		}
 		// crear el finally para cerrar el stream
 	}
+	
+	
+	public static Parser getInstance() {
+        return inst;
+    }
 }
