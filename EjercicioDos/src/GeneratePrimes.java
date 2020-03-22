@@ -1,12 +1,52 @@
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GeneratePrimes {
 
+	private int cantPrimes;
+	public GeneratePrimes(int cantPrimes) {
+		this.cantPrimes=cantPrimes;
+	}
+	
+	public int[] GeneratePrimes()
+	{
+		List<Integer> primes = new ArrayList<Integer>();
+		primes.add(2);
+	    int nextPrime = 3;
+	    while (primes.size() < cantPrimes)
+	    {
+	        if (esPrimo(nextPrime))
+	        {
+	            primes.add(nextPrime);
+	        }
+	        nextPrime += 2;
+	    }
+	    return primes.stream().mapToInt(i->i).toArray();
+	}
+	
+	
+	private boolean esPrimo(int numero)
+    {
+        int divisor = 2;
+        int resto = 0;
+        while (divisor < numero)
+        {
+            resto = numero % divisor;
+            if(resto == 0)
+            {
+                return false;
+            }
+            divisor = divisor + 1;
+        }
+        return true;
+    }
 	
 	public int[] GetPrimes() {
-		final int M = 1000;
+		
 		
 		final int ORDMAX = 30;
-		int P[] = new int[M + 1];
+		int P[] = new int[cantPrimes + 1];
 		
 		int J;
 		int K;
@@ -20,7 +60,7 @@ public class GeneratePrimes {
 		P[1] = 2;
 		ORD = 2;
 		SQUARE = 9;
-		while (K < M) {
+		while (K < cantPrimes) {
 			do {
 				J += 2;
 				if (J == SQUARE) {

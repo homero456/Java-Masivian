@@ -13,7 +13,7 @@ public class Printer {
 	public void Start(int P[]) {
 		this.cantPrimes = P.length -1;
 		int PAGENUMBER = 1;
-		int PAGEOFFSET = 1;
+		int PAGEOFFSET = 0;
 		while (PAGEOFFSET <= cantPrimes) {
 			PrintHeader(cantPrimes,PAGENUMBER);
 			PrintBody(PAGEOFFSET,P);
