@@ -16,6 +16,7 @@ public class Printer implements IPrinter {
 		this.cantPrimes = list.length - 1;
 		int pageNumber = 1;
 		int pageOffSet = 0;
+		PrintTitle();
 		while (pageOffSet <= cantPrimes) {
 			PrintHeader(pageNumber);
 			PrintBody(pageOffSet);
@@ -24,10 +25,15 @@ public class Printer implements IPrinter {
 			pageOffSet += cantRows * cantColumns;
 		}
 	}
+	
+	public void PrintTitle() {
+		System.out.print(" The First ");
+		System.out.print(Integer.toString(cantPrimes + 1));
+		System.out.println("\n");
+	}
 
 	public void PrintHeader(int pageNumber) {
-		System.out.print("The First ");
-		System.out.print(Integer.toString(cantPrimes));
+		
 		System.out.print(" Prime Numbers === Page ");
 		System.out.print(Integer.toString(pageNumber));
 		System.out.println("\n");
@@ -46,7 +52,7 @@ public class Printer implements IPrinter {
 	}
 
 	public void PrintFoot() {
-		System.out.println("end page \f");
+		System.out.println(" end page");
 	}
 
 }
