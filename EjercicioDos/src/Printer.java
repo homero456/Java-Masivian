@@ -1,49 +1,52 @@
 
-public class Printer {
-	
-	private int cantPrimes;
-	private int RR;  //Numero de filas
-	private int CC;	  //Numero de columnas
-	
-	public Printer(int RR, int CC) {
-		this.CC=CC;
-		this.RR=RR;
+public class Printer implements IPrinter {
+
+	private int cantPrimes; //cantidad de numeros primos
+	private int cantRows; // Numero de filas
+	private int cantColumns; // Numero de columnas
+	private int list[]; //Array de numero primos
+
+	public Printer(int cantRows, int cantColumns,int list[]) {
+		this.cantColumns = cantColumns;
+		this.cantRows = cantRows;
+		this.list = list;
 	}
-	
-	public void Start(int P[]) {
-		this.cantPrimes = P.length -1;
-		int PAGENUMBER = 1;
-		int PAGEOFFSET = 0;
-		while (PAGEOFFSET <= cantPrimes) {
-			PrintHeader(cantPrimes,PAGENUMBER);
-			PrintBody(PAGEOFFSET,P);
+
+	public void Print() {
+		this.cantPrimes = list.length - 1;
+		int pageNumber = 1;
+		int pageOffSet = 0;
+		while (pageOffSet <= cantPrimes) {
+			PrintHeader(pageNumber);
+			PrintBody(pageOffSet);
 			PrintFoot();
-			PAGENUMBER++;
-			PAGEOFFSET += RR * CC;
+			pageNumber++;
+			pageOffSet += cantRows * cantColumns;
 		}
 	}
-	
-	public void PrintHeader(int cantPrimes,int PAGENUMBER) {
+
+	public void PrintHeader(int pageNumber) {
 		System.out.print("The First ");
 		System.out.print(Integer.toString(cantPrimes));
 		System.out.print(" Prime Numbers === Page ");
-		System.out.print(Integer.toString(PAGENUMBER));
+		System.out.print(Integer.toString(pageNumber));
 		System.out.println("\n");
 	}
-	
-	public void PrintBody(int PAGEOFFSET, int P[]) {
-		int ROWOFFSET;
-		int C;
-		for (ROWOFFSET = PAGEOFFSET; ROWOFFSET <= PAGEOFFSET + RR - 1; ROWOFFSET++) {
-			for (C = 0; C <= CC - 1; C++)
-				if (ROWOFFSET + C * RR <= cantPrimes)
-					System.out.printf("%10d", P[ROWOFFSET + C * RR]);
+
+	public void PrintBody(int pageOffSet) {
+		int rowOffSet;
+		for (rowOffSet = pageOffSet; rowOffSet <= pageOffSet + cantRows - 1; rowOffSet++) {
+			for (int col = 0; col <= cantColumns - 1; col++) {
+				if (rowOffSet + col * cantRows <= cantPrimes) {
+					System.out.printf("%10d", list[rowOffSet + col * cantRows]);
+				}
+			}
 			System.out.println();
 		}
 	}
-	
+
 	public void PrintFoot() {
 		System.out.println("end page \f");
 	}
-	
+
 }

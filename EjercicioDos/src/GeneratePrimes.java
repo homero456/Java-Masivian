@@ -2,31 +2,39 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeneratePrimes {
+public class GeneratePrimes implements IPrimes {
 
+	private List<Integer> primes;	
 	private int cantPrimes;
-	public GeneratePrimes(int cantPrimes) {
-		this.cantPrimes=cantPrimes;
+	public GeneratePrimes() {		
+		this.primes = new ArrayList<Integer>();
 	}
 	
-	public int[] GeneratePrimes()
+	//Genera la cantidad de números primos
+	public int[] GeneratePrimes(int cantPrimes)
 	{
-		List<Integer> primes = new ArrayList<Integer>();
-		primes.add(2);
+		this.cantPrimes=cantPrimes;
+		SetPrimeTwo();
 	    int nextPrime = 3;
-	    while (primes.size() < cantPrimes)
+	    while (this.primes.size() < cantPrimes)
 	    {
-	        if (esPrimo(nextPrime))
+	        if (EsPrimo(nextPrime))
 	        {
-	            primes.add(nextPrime);
+	        	this.primes.add(nextPrime);
 	        }
 	        nextPrime += 2;
 	    }
-	    return primes.stream().mapToInt(i->i).toArray();
+	    return this.primes.stream().mapToInt(i->i).toArray();
 	}
 	
+	//Setea el número dos como primo
+	public void SetPrimeTwo() 
+	{
+		this.primes.add(2);
+	}	
 	
-	private boolean esPrimo(int numero)
+	//Valida si el número es primo
+	public boolean EsPrimo(int numero)
     {
         int divisor = 2;
         int resto = 0;
@@ -40,50 +48,6 @@ public class GeneratePrimes {
             divisor = divisor + 1;
         }
         return true;
-    }
-	
-	public int[] GetPrimes() {
-		
-		
-		final int ORDMAX = 30;
-		int P[] = new int[cantPrimes + 1];
-		
-		int J;
-		int K;
-		boolean JPRIME;
-		int ORD;
-		int SQUARE;
-		int N = 0;
-		int MULT[] = new int[ORDMAX + 1];
-		J = 1;
-		K = 1;
-		P[1] = 2;
-		ORD = 2;
-		SQUARE = 9;
-		while (K < cantPrimes) {
-			do {
-				J += 2;
-				if (J == SQUARE) {
-					ORD++;
-					SQUARE = P[ORD] * P[ORD];
-					MULT[ORD - 1] = J;
-				}
-				N = 2;
-				JPRIME = true;
-				while (N < ORD && JPRIME) {
-					while (MULT[N] < J)
-
-						MULT[N] += P[N] + P[N];
-					if (MULT[N] == J)
-						JPRIME = false;
-					N++;
-				}
-			} while (!JPRIME);
-			K++;
-			P[K] = J;
-		}
-		
-		return P;
-	}
+    }	
 	
 }
